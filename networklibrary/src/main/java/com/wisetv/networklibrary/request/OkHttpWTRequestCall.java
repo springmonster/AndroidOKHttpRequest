@@ -2,7 +2,6 @@ package com.wisetv.networklibrary.request;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 
 import com.wisetv.networklibrary.callback.WTStringResponseCallback;
 import com.wisetv.networklibrary.log.WTLog;
@@ -102,7 +101,6 @@ public class OkHttpWTRequestCall extends WTRequestCall {
         return builder;
     }
 
-    @NonNull
     private Headers generateOkHttpHeaders() {
         Headers.Builder builder = new Headers.Builder();
 
@@ -118,7 +116,6 @@ public class OkHttpWTRequestCall extends WTRequestCall {
         return builder.build();
     }
 
-    @NonNull
     private RequestBody generateOkHttpBodyParams() {
         FormBody.Builder builder = new FormBody.Builder();
 
