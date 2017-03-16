@@ -2,6 +2,7 @@ package com.wisetv.networklibrary.request;
 
 import android.content.Context;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.wisetv.networklibrary.callback.WTStringResponseCallback;
 import com.wisetv.networklibrary.log.WTLog;
@@ -110,7 +111,9 @@ public class OkHttpWTRequestCall extends WTRequestCall {
             Map.Entry<String, String> entry = (Map.Entry) iterator.next();
             String key = entry.getKey();
             String value = entry.getValue();
-            builder.add(key, value);
+            if (!TextUtils.isEmpty(key) && value != null) {
+                builder.add(key, value);
+            }
         }
 
         return builder.build();
@@ -125,7 +128,9 @@ public class OkHttpWTRequestCall extends WTRequestCall {
             Map.Entry<String, String> entry = (Map.Entry) iterator.next();
             String key = entry.getKey();
             String value = entry.getValue();
-            builder.add(key, value);
+            if (!TextUtils.isEmpty(key) && value != null) {
+                builder.add(key, value);
+            }
         }
 
         return builder.build();

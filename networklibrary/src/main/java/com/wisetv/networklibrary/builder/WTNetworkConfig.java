@@ -3,6 +3,7 @@ package com.wisetv.networklibrary.builder;
 import android.content.Context;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSocketFactory;
@@ -12,10 +13,9 @@ import javax.net.ssl.SSLSocketFactory;
  */
 
 public class WTNetworkConfig {
-    private int mRequestFramework;
     private boolean isLoggable;
     private Context mContext;
-    private HashMap<String, String> mHeaders = new HashMap<>();
+    private Map<String, String> mHeaders = new HashMap<>();
     private int mTimeout = 5000;
     private HostnameVerifier mHostnameVerifier;
     private SSLSocketFactory mSSLSocketFactory;
@@ -31,11 +31,7 @@ public class WTNetworkConfig {
         return mContext;
     }
 
-    public int getRequestFramework() {
-        return mRequestFramework;
-    }
-
-    public HashMap<String, String> getHeaders() {
+    public Map<String, String> getHeaders() {
         return mHeaders;
     }
 
@@ -54,7 +50,7 @@ public class WTNetworkConfig {
     public static class Builder {
         Context mContext = null;
         boolean isLoggable = false;
-        HashMap<String, String> mHeaders;
+        Map<String, String> mHeaders;
         int mTimeout;
         HostnameVerifier mHostnameVerifier;
         SSLSocketFactory mSSLSocketFactory;
@@ -72,7 +68,7 @@ public class WTNetworkConfig {
             return this;
         }
 
-        public Builder setHeaders(HashMap<String, String> headers) {
+        public Builder setHeaders(Map<String, String> headers) {
             mHeaders = headers;
             return this;
         }
