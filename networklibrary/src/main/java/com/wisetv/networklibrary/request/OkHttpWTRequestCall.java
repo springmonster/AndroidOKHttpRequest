@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import com.wisetv.networklibrary.callback.WTStringResponseCallback;
 import com.wisetv.networklibrary.log.WTLog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,6 +19,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.Headers;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -98,6 +102,8 @@ public class OkHttpWTRequestCall extends WTRequestCall {
             builder.get();
         } else if (super.mMethod == METHOD.POST) {
             builder.post(generateOkHttpBodyParams());
+        } else if (super.mMethod == METHOD.POST_JSON) {
+            builder.post(generateOkHttpBodyParamsForJSON());
         }
         return builder;
     }
@@ -134,5 +140,27 @@ public class OkHttpWTRequestCall extends WTRequestCall {
         }
 
         return builder.build();
+    }
+
+    private RequestBody generateOkHttpBodyParamsForJSON() {
+        JSONObject jsonObject = new JSONObject();
+
+        Iterator iterator = mBodyParams.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = (Map.Entry) iterator.next();
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (!TextUtils.isEmpty(key) && value != null) {
+                try {
+                    jsonObject.put(key, value);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        return requestBody;
     }
 }

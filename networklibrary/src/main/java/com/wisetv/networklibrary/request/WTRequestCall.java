@@ -125,5 +125,6 @@ public abstract class WTRequestCall {
     public static class METHOD {
         public static final int GET = 0;
         public static final int POST = 1;
+        public static final int POST_JSON = 2;
     }
 }

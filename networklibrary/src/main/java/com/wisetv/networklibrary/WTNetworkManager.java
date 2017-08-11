@@ -62,4 +62,8 @@ public class WTNetworkManager {
     public WTRequestCall.Builder post() {
         return generateWTRequestCallBuilder().setMethod(WTRequestCall.METHOD.POST);
     }
+
+    public WTRequestCall.Builder postJSON() {
+        return generateWTRequestCallBuilder().setMethod(WTRequestCall.METHOD.POST_JSON);
+    }
 }
